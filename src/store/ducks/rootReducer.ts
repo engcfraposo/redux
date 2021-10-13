@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import switchs from "./switch/reducer";
+import switchs from "./switchs/reducer";
+import ceps from "./ceps/reducer";
 
 const rootReducer = combineReducers({
-    switchs
+    switchs,
+    ceps
 })
 
 export default rootReducer

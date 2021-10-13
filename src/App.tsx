@@ -1,49 +1,45 @@
 import Switch from '@mui/material/Switch';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from './store';
+import { getCeps } from './store/ducks/ceps/actions';
+import { switchA, switchB, switchC, switchD } from './store/ducks/switchs/actions';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-interface IChecked  {
-  A: boolean,
-  B: boolean,
-  C: boolean,
-  D: boolean,
-}
-
 function App() {
-  const [checked, setChecked] = useState<IChecked>({
-    A: false,
-    B: false,
-    C: false,
-    D: false
-  })
+  const dispatch = useDispatch();
+  const checked = useSelector(
+    (state: ApplicationState) => state.switchs
+  )
 
+  const { local, loading } = useSelector(
+    (state: ApplicationState) => state.ceps
+  )
+  
   const onChange = (key: string) => {
     switch (key) {
       case "A":
-        setChecked(
-          {...checked, A: !checked.A}
-        )
+        dispatch(switchA())
         break;
-        case "B":
-          setChecked(
-            {...checked, B: !checked.B}
-          )
+      case "B":
+        dispatch(switchB())
         break;
-        case "C":
-          setChecked(
-            {...checked, C: !checked.C}
-          )
+      case "C":
+        dispatch(switchC())
         break;
-        case "D":
-          setChecked(
-            {...checked, D: !checked.D}
-          )
+      case "D":
+        dispatch(switchD())
         break;
       default:
         break;
     }
   }
+
+  useEffect(()=>{
+    dispatch(getCeps("a"))
+  },[])
+
   return (
     <div>
       <Switch {...label} 
@@ -62,6 +58,9 @@ function App() {
        onChange={() => onChange("D")} 
        checked={checked.D} 
       />
+      <div>
+        {!loading && <p>{local?.cep}</p>}
+      </div>
     </div>
   );
 }
