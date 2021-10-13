@@ -1,7 +1,6 @@
 import produce from 'immer';
 import { SwitchState, SwitchTypes } from "./types";
 
-
 const INITIAL_STATE: SwitchState = {
     A: false,
     B: false,
