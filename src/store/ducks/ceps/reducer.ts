@@ -6,18 +6,17 @@ const INITIAL_STATE: CepsState = {
     loading: false
 }
 
-export default function ceps(state = INITIAL_STATE, action: any = null){
-    console.log(action)
-    return produce(state, newState => {
+export default function ceps(state: CepsState = INITIAL_STATE, action: any = null){
+    return produce(state, (newState: CepsState) => {
         switch (action.type) {
             case CepsTypes.GET_CEPS:
                 newState.local = {} as Local
                 newState.loading = true
                 break;
             case CepsTypes.GET_CEPS_FINISH:
-                newState.local = action.payload
+                newState.local = action.payload as Local
                 newState.loading = false
-            break;
+                break;
             default:
                 break;
         }
