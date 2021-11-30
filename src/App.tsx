@@ -38,7 +38,7 @@ function App() {
 
   useEffect(()=>{
     dispatch(getCeps("a"))
-  },[])
+  },[dispatch])
 
   return (
     <div>
