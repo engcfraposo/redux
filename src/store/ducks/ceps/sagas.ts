@@ -1,10 +1,8 @@
 import { put, call } from 'redux-saga/effects';
 import { getCepsFinish } from './actions';
 import api from '../../../api'
-import { Local } from './types';
 
 export function* getCeps({payload}: any) {
-    const { cep } = payload;
     try {
         const url = `/50721260/json`
         console.log("iniciou sagas getCeps")
