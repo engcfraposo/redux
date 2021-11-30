@@ -8,8 +8,8 @@ const INITIAL_STATE: SwitchState = {
     D: false
 }
 
-export default function switchs(state = INITIAL_STATE, action: any = null){
-    return produce(state, newState => {
+export default function switchs(state: SwitchState = INITIAL_STATE, action: any = null){
+    return produce(state, (newState: SwitchState) => {
         switch (action.type) {
             case SwitchTypes.SWITCH_A:
                 newState.A = !state.A    
